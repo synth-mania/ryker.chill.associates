@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Ryker Chill Associates</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: hover 3s infinite ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Navigation bar styles */
+        nav {
+            width: 100%;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 10; /* Make sure the nav stays above the content */
+        }
+
+        nav a {
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 300;
+            padding: 10px 20px;
+            margin: 0 10px;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: white;
+            color: black;
+            box-shadow: 0 0 15px white, 0 0 30px white, 0 0 45px white;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            animation: float 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
+        }
+
+        p {
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 20px;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            padding: 0 20px;
+            color: white;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        /* Keyframes for the floating effect of h1 */
+        @keyframes float {
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+        }
+
+        /* Wipe-off white box animation */
+        @keyframes wipeOff {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%); /* Move it off the left side */
+            }
+        }
+
+        /* Wipe-on white box animation (sliding in from the left) */
+        @keyframes wipeOn {
+            0% {
+                transform: translateX(-100%); /* Start off-screen */
+            }
+            100% {
+                transform: translateX(0); /* Move to cover the full screen */
+            }
+        }
+
+        /* Full-screen white box with animation */
+        .box {
+            position: fixed; /* Use fixed position to cover everything, including the navbar */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 20; /* Ensure the box is on top of everything, including the nav */
+            animation: wipeOff 0.8s forwards; /* Initial wipe-off animation */
+        }
+
+        /* Class to trigger the wipe-on animation (sliding in from the left) */
+        .box.wipe-on {
+            animation: wipeOn 0.8s forwards; /* Reverse wipe-off (wipe-on) animation */
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Full-screen box that wipes off -->
+    <div class="box"></div>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="index.html" onclick="triggerBoxAnimation(event, 'index.html')">HOME</a>
+        <a href="about.html" class="active">ABOUT</a>
+        <a href="projects.html" onclick="triggerBoxAnimation(event, 'projects.html')">PROJECTS</a>
+        <a href="https://chill.associates" target="_blank" onclick="triggerBoxAnimation(event, 'https://chill.associates')">CHILL.ASSOCIATES</a>
+    </nav>
+
+    <!-- Header Section -->
+    <h1>ABOUT</h1>
+
+    <!-- Paragraph Section -->
+    <p>
+        My name is Ryker. I am officially chill. I enjoy cars/trucks, music, games, and working hard to create end results I can be proud of in all aspects of life. This is my personal webpage which is directly affiliated with CHILL.ASSOCIATES and it's members. I will upload various projects as they come and go, in different formats including blogs and videos on this website, which you can check out under the "PROJECTS" tab.
+    </p>
+
+    <script>
+        // Function to trigger the wipe-on animation when a button is clicked
+        function triggerBoxAnimation(event, url) {
+            const box = document.querySelector('.box');
+            
+            // Prevent the default action of the link (no immediate redirect)
+            event.preventDefault();
+            
+            // Remove the wipe-on class to allow the animation to play
+            box.classList.remove('wipe-on');
+            
+            // Force a reflow (recalculate styles) to reset the animation
+            void box.offsetWidth;
+            
+            // Add the wipe-on class to trigger the animation of sliding in from the left
+            box.classList.add('wipe-on');
+            
+            // After the animation completes (1 second), redirect to the new page
+            setTimeout(function() {
+                window.location.href = url; // Navigate to the linked page
+            }, 1000); // 1 second delay
+        }
+    </script>
+</body>
+</html>
