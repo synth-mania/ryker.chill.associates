@@ -4,118 +4,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Ryker Chill Associates</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-color: black;
-            color: white;
-            font-family: 'Courier New', Courier, monospace;
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
             height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            animation: hover 3s infinite ease-in-out;
-            position: relative;
             overflow: hidden;
+            position: relative;
         }
 
         /* Navigation bar styles */
         nav {
             width: 100%;
-            background-color: black;
+            background-color: #1f1f1f;
             display: flex;
             justify-content: center;
-            padding: 20px 0;
+            padding: 10px 0;
             position: sticky;
             top: 0;
-            z-index: 10; /* Make sure the nav stays above the content */
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
 
         nav a {
-            font-size: 1.2rem;
+            font-size: 1rem;
             text-decoration: none;
-            color: white;
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: 300;
+            color: #ffffff;
+            font-weight: 400;
             padding: 10px 20px;
             margin: 0 10px;
-            position: relative;
-            overflow: hidden;
-            transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
+            background-color: #292929;
+            border-radius: 8px;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         nav a:hover {
-            background-color: white;
-            color: black;
-            box-shadow: 0 0 15px white, 0 0 30px white, 0 0 45px white;
-            border-radius: 10px;
+            background-color: #ffffff;
+            color: #121212;
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
+        }
+
+        nav a.active {
+            background-color: #444;
+            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
         }
 
         h1 {
-            font-size: 4rem;
+            font-size: 3rem;
             text-align: center;
-            color: white;
+            color: #f8f8f8;
             margin-top: 50px;
-            animation: float 2s ease-in-out infinite alternate;
-            text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+            animation: fadeIn 1.5s ease-out forwards;
         }
 
         p {
             font-size: 1.2rem;
             text-align: center;
             margin: 20px;
-            font-family: 'Arial', sans-serif;
             line-height: 1.6;
             padding: 0 20px;
-            color: white;
+            color: #d0d0d0;
             max-width: 600px;
             width: 100%;
+            animation: fadeIn 2s ease-out forwards;
         }
 
-        /* Keyframes for the floating effect of h1 */
-        @keyframes float {
-            from { transform: translateY(0); }
-            to { transform: translateY(-5px); }
-        }
-
-        /* Wipe-off white box animation */
-        @keyframes wipeOff {
-            0% {
-                transform: translateX(0);
+        /* Keyframes for fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
-            100% {
-                transform: translateX(-100%); /* Move it off the left side */
-            }
-        }
-
-        /* Wipe-on white box animation (sliding in from the left) */
-        @keyframes wipeOn {
-            0% {
-                transform: translateX(-100%); /* Start off-screen */
-            }
-            100% {
-                transform: translateX(0); /* Move to cover the full screen */
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
         /* Full-screen white box with animation */
         .box {
-            position: fixed; /* Use fixed position to cover everything, including the navbar */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: white;
-            z-index: 20; /* Ensure the box is on top of everything, including the nav */
-            animation: wipeOff 0.8s forwards; /* Initial wipe-off animation */
+            background-color: #000000;
+            z-index: 20;
+            animation: slideOut 0.8s forwards;
         }
 
-        /* Class to trigger the wipe-on animation (sliding in from the left) */
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
         .box.wipe-on {
-            animation: wipeOn 0.8s forwards; /* Reverse wipe-off (wipe-on) animation */
+            animation: slideIn 0.8s forwards;
         }
 
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -135,30 +142,17 @@
 
     <!-- Paragraph Section -->
     <p>
-        My name is Ryker. I am officially chill. I enjoy cars/trucks, music, games, and working hard to create end results I can be proud of in all aspects of life. This is my personal webpage which is directly affiliated with CHILL.ASSOCIATES and it's members. I will upload various projects as they come and go, in different formats including blogs and videos on this website, which you can check out under the "PROJECTS" tab.
+        My name is Ryker. <br> I am motivated by success, educated by failure. <br> <br> I am passionate about: <br> Cars & Trucks <br> Making Money <br> Enjoying Life <br><br> Check out my Projects page to view my work and learn more about me and my life.
     </p>
 
     <script>
-        // Function to trigger the wipe-on animation when a button is clicked
         function triggerBoxAnimation(event, url) {
             const box = document.querySelector('.box');
-            
-            // Prevent the default action of the link (no immediate redirect)
             event.preventDefault();
-            
-            // Remove the wipe-on class to allow the animation to play
             box.classList.remove('wipe-on');
-            
-            // Force a reflow (recalculate styles) to reset the animation
             void box.offsetWidth;
-            
-            // Add the wipe-on class to trigger the animation of sliding in from the left
             box.classList.add('wipe-on');
-            
-            // After the animation completes (1 second), redirect to the new page
-            setTimeout(function() {
-                window.location.href = url; // Navigate to the linked page
-            }, 1000); // 1 second delay
+            setTimeout(() => window.location.href = url, 800);
         }
     </script>
 </body>

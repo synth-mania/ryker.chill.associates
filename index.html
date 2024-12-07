@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ryker Chill Associates</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-color: black;
-            color: white;
-            font-family: 'Courier New', Courier, monospace;
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -20,144 +21,106 @@
             position: relative;
         }
 
-        /* Animation for text and buttons dropping from the top */
-        @keyframes dropIn {
-            0% {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
         h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             text-align: center;
-            text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
-            animation: glow 2s infinite alternate, hover 3s infinite ease-in-out, dropIn 1s ease-out forwards;
+            color: #f8f8f8;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+            animation: fadeIn 1.5s ease-out forwards;
         }
 
         nav {
             margin-top: 20px;
             display: flex;
-            justify-content: center; /* Align buttons horizontally */
-            gap: 20px; /* Space between buttons */
-            animation: dropIn 1s ease-out forwards;
+            justify-content: center;
+            gap: 20px;
+            animation: fadeIn 2s ease-out forwards;
         }
 
         nav a {
-            font-size: 1.2rem;
+            font-size: 1rem;
             text-decoration: none;
-            color: white;
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: 300;
+            color: #ffffff;
+            font-weight: 400;
             padding: 10px 20px;
-            position: relative;
-            overflow: hidden;
-            transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
-            z-index: 2;
-            animation: dropIn 1s ease-out forwards;
+            background-color: #1f1f1f;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         nav a:hover {
-            background-color: white;
-            color: black;
-            box-shadow: 0 0 15px white, 0 0 30px white, 0 0 45px white;
-            border-radius: 10px;
+            background-color: #ffffff;
+            color: #121212;
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
         }
 
-        @keyframes glow {
+        @keyframes fadeIn {
             from {
-                text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
+                opacity: 0;
+                transform: translateY(30px);
             }
             to {
-                text-shadow: 0 0 15px white, 0 0 25px white, 0 0 40px white;
-            }
-        }
-
-        @keyframes hover {
-            0%, 100% {
+                opacity: 1;
                 transform: translateY(0);
             }
-            50% {
-                transform: translateY(-3px); /* Slight floating effect */
-            }
         }
 
-        /* Wipe-off white box animation */
-        @keyframes wipeOff {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-100%); /* Move it off the left side */
-            }
-        }
-
-        /* Wipe-on white box animation (sliding in from the left) */
-        @keyframes wipeOn {
-            0% {
-                transform: translateX(-100%); /* Start off-screen */
-            }
-            100% {
-                transform: translateX(0); /* Move to cover the full screen */
-            }
-        }
-
-        /* Full-screen white box with animation */
         .box {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: white; /* Solid color */
-            z-index: 1; /* Make sure it is behind the content */
-            animation: wipeOff 0.8s forwards; /* Initial wipe-off animation */
+            background-color: #000000;
+            z-index: 1;
+            animation: slideOut 0.8s forwards;
         }
 
-        /* Class to trigger the wipe-on animation (sliding in from the left) */
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
         .box.wipe-on {
-            animation: wipeOn 0.8s forwards; /* Reverse wipe-off (wipe-on) animation */
+            animation: slideIn 0.8s forwards;
         }
 
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Full-screen box that wipes off -->
     <div class="box"></div>
 
+    
     <h1>RYKER.CHILL.ASSOCIATES</h1>
     <nav>
-        <a href="index.html" onclick="triggerBoxAnimation(event, 'index.html')">HOME</a> <!-- Make the home button lead to index.html -->
+        <a href="index.html" onclick="triggerBoxAnimation(event, 'index.html')">HOME</a>
         <a href="about.html" onclick="triggerBoxAnimation(event, 'about.html')">ABOUT</a>
         <a href="projects.html" onclick="triggerBoxAnimation(event, 'projects.html')">PROJECTS</a>
         <a href="https://chill.associates" target="_blank" onclick="triggerBoxAnimation(event, 'https://chill.associates')">CHILL.ASSOCIATES</a>
     </nav>
 
     <script>
-        // Function to trigger the wipe-on animation when a button is clicked
         function triggerBoxAnimation(event, url) {
             const box = document.querySelector('.box');
-            
-            // Prevent the default action of the link (no immediate redirect)
             event.preventDefault();
-            
-            // Remove the wipe-on class to allow the animation to play
             box.classList.remove('wipe-on');
-            
-            // Force a reflow (recalculate styles) to reset the animation
             void box.offsetWidth;
-            
-            // Add the wipe-on class to trigger the animation of sliding in from the left
             box.classList.add('wipe-on');
-            
-            // After the animation completes (1 second), redirect to the new page
-            setTimeout(function() {
-                window.location.href = url; // Navigate to the linked page
-            }, 1000); // 1 second delay
+            setTimeout(() => window.location.href = url, 800);
         }
     </script>
 </body>
